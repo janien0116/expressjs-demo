@@ -79,9 +79,16 @@ app.put("/api/users", (req, res) => {
   );
 });
 
-app.delete("/api/users", (req, res) => {
+app.delete("/api/users", async (req, res) => {
   const { id } = req.body;
 
+  // try {
+  //   const [result] = await db.query("DELETE FROM users WHERE id = ?", [id]);
+  //   res.json(result);
+  //   res.status(200).json({ msg: "Data deleted successfully" });
+  // } catch (error) {
+  //   throw error;
+  // }
   db.query("DELETE FROM users WHERE id = ?", [id], (err, result, fields) => {
     if (err) {
       throw err;
